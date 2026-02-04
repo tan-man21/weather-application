@@ -14,10 +14,17 @@ const getLocation = async () => {
         const longitude = data.results[0].longitude;
         console.log(latitude, longitude)
 
-        const res2 = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&&current=temperature_2m,is_day&temperature_unit=fahrenheit`)
+        const res2 = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min&hourly=temperature_2m&current=temperature_2m,is_day&temperature_unit=fahrenheit`)
         const data2 = await res2.json();
+
+        const days = data2.daily.time;
+        for (let i = 0; i < days.length; i++) {
+            const day = document.createElement('li');
+            day.textContent = `${days[i]} Low: ${data2.daily.temperature_2m_min[i]}°F - High ${data2.daily.temperature_2m_max[i]}°F`;
+            document.querySelector('.forecast').appendChild(day);
+        }
         
-        console.log(data2)
+        // console.log(data2)
 
         temp.textContent = `${data2.current.temperature_2m}°F`;
         if (data2.current.is_day === 1) {
