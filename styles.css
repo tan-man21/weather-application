@@ -1,5 +1,5 @@
 body {
-    background-image: url('./assets/background.jpg');
+    background-image: url('./assets/background4.jpg');
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -8,27 +8,105 @@ body {
     /* outline: 4px solid red; */
 }
 
+button {
+    cursor: pointer;
+}
+
+ul {
+    padding-inline-start: 0;
+}
+
 .container {
-    display: flex;
-    flex-direction: column;
     align-items: center;
-    width: 60%;
+    width: 40%;
     margin: auto;
-    background-color: rgba(255, 255, 255, .1);
-    backdrop-filter: blur(8px);
-    border-radius: 10px;;
+    align-content: center;
+    height: 100vh;
 }
 
 .resultsModal {
     margin: auto;
     padding: 10px;
-    border-radius: 10px;
-    border: none;
-    background-color: lightblue;
     color: white;
+    border: 1px solid rgba(255, 255, 255, .1);
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
     width: 50%;
+    text-align: center;
+    background-color: rgba(255, 255, 255, .1);
+    backdrop-filter: blur(8px);
+    border-radius: 10px;
+}
+
+.resultsModal ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+[class*="result-"] {
+    border: none;
+    margin: 5px 0px;
+    padding: 15px;
+    border: 1px solid rgba(255, 255, 255, .1);
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, .1);
+    backdrop-filter: blur(8px);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 80%;
+    text-align: center;
+}
+
+.searchContainer {
+    /* display: flex;
+    flex-direction: column; */
+    margin: auto;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, .1);
+    backdrop-filter: blur(8px);
+    border-radius: 10px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    width: 50%;
+    text-align: center;
+    height: 250px;
+    align-content: center;
+}
+
+.weatherResults {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(255, 255, 255, .1);
+    backdrop-filter: blur(8px);
+    border-radius: 10px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    height: 90vh;
+}
+
+.weatherResults ul {
+    position: relative;
+    bottom: 10%;
+}
+
+.weatherResults li {
+    list-style: none;
+    border: none;
+    margin: 5px 0px;
+    padding: 15px;
+    border: 1px solid rgba(255, 255, 255, .1);
+    border-radius: 10px;
+    /* background-color: rgba(255, 255, 255, .1); */
+    /* backdrop-filter: blur(.1px); */
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
     text-align: center;
 }

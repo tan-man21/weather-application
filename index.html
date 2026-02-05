@@ -9,8 +9,11 @@
     </head>
     <body>
         <div class="container">
-            <button class="searchModal">Find a Location</button>
-            <button class="myLocation">My Location 📍</button>
+            <div class="searchContainer">
+                <button class="searchModal">Find a Location</button>
+                <h4>OR</h4>
+                <button class="myLocation">My Location 📍</button>
+            </div>
 
             <dialog class="resultsModal">
                 <label for="location-search">Search your location:</label>
@@ -21,15 +24,17 @@
                 </ul>
             </dialog>
 
-            <h1>Weather</h1>
-            <div class="imgContainer">
-                
-            </div>
-            <h3 class="temp"></h3>
-            <h3 class="time"></h3>
-            <ul class="forecast">
+            <div class="weatherResults">
+                <h1 class="title"></h1>
+                <div class="imgContainer">
 
-            </ul>
+                </div>
+                <h3 class="temp"></h3>
+                <h3 class="time"></h3>
+                <ul class="forecast">
+
+                </ul>
+            </div>
         </div>
         <script src="index.js"></script>
     </body>

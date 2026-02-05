@@ -2,6 +2,7 @@ const searchInput = document.getElementById('location-search');
 const temp = document.querySelector('.temp')
 const time = document.querySelector('.time')
 const forecast = document.querySelector('.forecast')
+const title = document.querySelector('.title')
 
 // let searchedName = searchInput.value;
 
@@ -32,8 +33,11 @@ const getLocation = async () => {
             result.addEventListener('click', () => {
                 latitude = data.results[i].latitude;
                 longitude = data.results[i].longitude;
-                getWeather();
                 document.querySelector('dialog').close();
+                getWeather();
+                document.querySelector('.searchContainer').style.display = 'none';
+                title.textContent = `${searchLocation} - ${admin1}`;
+                setTimeout(() => {document.querySelector('.weatherResults').style.display = 'flex';}, 500)
             })
         }
 
@@ -51,6 +55,8 @@ const getMyLocation = async () => {
             latitude = position.coords.latitude;
             longitude = position.coords.longitude;
             getWeather();
+            document.querySelector('.weatherResults').style.display = 'flex';
+            setTimeout(() => {title.textContent = 'Current Location';}, 500)
         })
       } else {
         alert("Geolocation is not supported by this browser.");
@@ -64,7 +70,6 @@ const getWeather = async () => {
 
     const days = data2.daily.time;
 
-
     forecast.innerHTML = '';
         
     for (let i = 0; i < days.length; i++) {
@@ -77,11 +82,11 @@ const getWeather = async () => {
     
 
     temp.textContent = `${data2.current.temperature_2m}°F`;
-    if (data2.current.is_day === 1) {
-        time.textContent = '🌞'
-    } else {
-        time.textContent = '🌙'
-    }
+    // if (data2.current.is_day === 1) {
+    //     time.textContent = '🌞'
+    // } else {
+    //     time.textContent = '🌙'
+    // }
 
     const weatherCode = data2.current.weather_code;
 
@@ -100,3 +105,8 @@ document.querySelector('.searchModal').addEventListener('click', () => {
 })
 
 document.querySelector('.myLocation').addEventListener('click', getMyLocation)
+
+document.querySelector('.myLocation').addEventListener('click', () => {
+    document.querySelector('.searchContainer').style.display = 'none';
+    setTimeout(() => {document.querySelector('.weatherResults, .title').style.display = 'flex';}, 500)
+})
