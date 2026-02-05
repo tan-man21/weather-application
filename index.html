@@ -4,7 +4,11 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://kit.fontawesome.com/d6c9559ed6.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="styles.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
         <title>Weather Application</title>
     </head>
     <body>
@@ -15,10 +19,11 @@
                 <button class="myLocation">My Location 📍</button>
             </div>
 
-            <dialog class="resultsModal">
-                <label for="location-search">Search your location:</label>
+            <dialog class="resultsModal">                
                 <input type="search" id="location-search" name="location-search" />
-                <button class="searchLocation">Search</button>
+                <i class="fa-solid fa-magnifying-glass searchLocation"></i>
+                <i class="fa-regular fa-circle-xmark"></i>
+                <!-- <button class="searchLocation">Search</button> -->
                 <ul class="searchResults">
 
                 </ul>

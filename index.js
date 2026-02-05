@@ -3,19 +3,25 @@ const temp = document.querySelector('.temp')
 const time = document.querySelector('.time')
 const forecast = document.querySelector('.forecast')
 const title = document.querySelector('.title')
+const searchResultsList = document.querySelector('.searchResults')
 
 // let searchedName = searchInput.value;
 
 let latitude = '';
 let longitude = '';
 
-const cloudy = [2,3]
+const cloudy = [2,3,45,48];
+const sunny = [0,1];
+const rainy = [51,53,55,61,63,65,80,81,82];
+const snowy = [56,57,66,67,71,73,75,77,85,86];
+const thunderstorm = [95,96,99];
+
 
 const getLocation = async () => {
 
     let searchedName = searchInput.value;
 
-    
+    searchResultsList.innerHTML = '';
 
     try {
         const res = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${searchedName}`)
@@ -27,7 +33,11 @@ const getLocation = async () => {
             const searchLocation = data.results[i].name;
             const country = data.results[i].country;
             const admin1 = data.results[i].admin1;
-            result.textContent = `${searchLocation} - ${admin1} - ${country}`;
+            if (admin1 === null || admin1 === undefined) {
+                result.textContent = `${searchLocation}`;
+            } else {
+                result.textContent = `${searchLocation} - ${admin1} - ${country}`;
+            }
             document.querySelector('.searchResults').appendChild(result);
 
             result.addEventListener('click', () => {
@@ -36,7 +46,11 @@ const getLocation = async () => {
                 document.querySelector('dialog').close();
                 getWeather();
                 document.querySelector('.searchContainer').style.display = 'none';
-                title.textContent = `${searchLocation} - ${admin1}`;
+                if (admin1 === null || admin1 === undefined) {
+                    title.textContent = `${searchLocation}`;
+                } else {
+                    title.textContent = `${searchLocation} - ${admin1}`;
+                }
                 setTimeout(() => {document.querySelector('.weatherResults').style.display = 'flex';}, 500)
             })
         }
@@ -56,7 +70,7 @@ const getMyLocation = async () => {
             longitude = position.coords.longitude;
             getWeather();
             document.querySelector('.weatherResults').style.display = 'flex';
-            setTimeout(() => {title.textContent = 'Current Location';}, 500)
+            setTimeout(() => {title.textContent = `Current Location`;}, 100)
         })
       } else {
         alert("Geolocation is not supported by this browser.");
@@ -91,10 +105,30 @@ const getWeather = async () => {
     const weatherCode = data2.current.weather_code;
 
     if (cloudy.includes(weatherCode)) {
-    const icon = document.createElement('img');
-    icon.style.width = '100px';
-    icon.src = `./assets/cloudy.png`;
-    document.querySelector('.imgContainer').appendChild(icon);
+        const icon = document.createElement('img');
+        icon.style.width = '100px';
+        icon.src = `./assets/cloudy.png`;
+        document.querySelector('.imgContainer').appendChild(icon);
+    } else if (sunny.includes(weatherCode)) {
+        const icon = document.createElement('img');
+        icon.style.width = '100px';
+        icon.src = `./assets/sunny.png`;
+        document.querySelector('.imgContainer').appendChild(icon);
+    } else if (rainy.includes(weatherCode)) {
+        const icon = document.createElement('img');
+        icon.style.width = '100px';
+        icon.src = `./assets/rainy.png`;
+        document.querySelector('.imgContainer').appendChild(icon);
+    } else if (snowy.includes(weatherCode)) {
+        const icon = document.createElement('img');
+        icon.style.width = '100px';
+        icon.src = `./assets/snowy.png`;
+        document.querySelector('.imgContainer').appendChild(icon);
+    } else if (thunderstorm.includes(weatherCode)) {
+        const icon = document.createElement('img');
+        icon.style.width = '100px';
+        icon.src = `./assets/thunderstorm.png`;
+        document.querySelector('.imgContainer').appendChild(icon);
     }
 }
 
@@ -109,4 +143,15 @@ document.querySelector('.myLocation').addEventListener('click', getMyLocation)
 document.querySelector('.myLocation').addEventListener('click', () => {
     document.querySelector('.searchContainer').style.display = 'none';
     setTimeout(() => {document.querySelector('.weatherResults, .title').style.display = 'flex';}, 500)
+})
+
+document.querySelector('.fa-circle-xmark').addEventListener('click', () => {
+    searchInput.value = '';
+    searchResultsList.innerHTML = '';
+})
+
+searchInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        getLocation();
+    }
 })

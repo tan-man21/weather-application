@@ -6,6 +6,7 @@ body {
 
 * {
     /* outline: 4px solid red; */
+    font-family: 'DM Sans', sans-serif;
 }
 
 button {
@@ -109,4 +110,37 @@ ul {
     font-size: 16px;
     font-weight: bold;
     text-align: center;
+}
+
+#location-search {
+    margin: 5px 0px;
+    padding: 15px;
+    border: 1px solid rgba(255, 255, 255, .1);
+    border-radius: 50px;
+    background-color: rgba(52, 52, 52, 0.1);
+    /* backdrop-filter: blur(8px); */
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 80%;
+    text-align: center;
+}
+
+[class*="magnifying-glass"] {
+    position: relative;
+    right: 78%;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+[class*="circle-xmark"] {
+    position: relative;
+    right: 8%;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
 }
