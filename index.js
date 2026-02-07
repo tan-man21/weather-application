@@ -4,6 +4,7 @@ const time = document.querySelector('.time')
 const forecast = document.querySelector('.forecast')
 const title = document.querySelector('.title')
 const searchResultsList = document.querySelector('.searchResults')
+const highslows = document.querySelector('.highlows')
 
 // let searchedName = searchInput.value;
 
@@ -90,12 +91,20 @@ const getWeather = async () => {
         const day = document.createElement('li');
         const date = new Date(days[i]);
         const weekday = date.toLocaleDateString('en', { weekday: 'long' });
-        day.textContent = `${weekday} Low: ${data2.daily.temperature_2m_min[i]}°F - High ${data2.daily.temperature_2m_max[i]}°F`;
+        day.textContent = `${days[i]} Low: ${data2.daily.temperature_2m_min[i]}°F - High ${data2.daily.temperature_2m_max[i]}°F`;
         forecast.appendChild(day);
+
+        if (i === 0) {
+            highslows.textContent = `H:${data2.daily.temperature_2m_max[i]}°  L:${data2.daily.temperature_2m_min[i]}°`;
+            highslows.style.marginTop = '0';
+            highslows.style.marginBottom = '25px';
+            highslows.style.fontWeight = 'normal';
+        }
     }
     
 
     temp.textContent = `${data2.current.temperature_2m}°F`;
+    temp.style.marginBottom = '0';
     // if (data2.current.is_day === 1) {
     //     time.textContent = '🌞'
     // } else {
@@ -136,6 +145,10 @@ document.querySelector('.searchLocation').addEventListener('click', getLocation)
 
 document.querySelector('.searchModal').addEventListener('click', () => {
     document.querySelector('dialog').showModal();
+})
+
+document.querySelector('.fa-xmark').addEventListener('click', () => {
+    document.querySelector('dialog').close();
 })
 
 document.querySelector('.myLocation').addEventListener('click', getMyLocation)

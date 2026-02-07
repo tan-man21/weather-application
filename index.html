@@ -14,15 +14,16 @@
     <body>
         <div class="container">
             <div class="searchContainer">
-                <button class="searchModal">Find a Location</button>
+                <button class="searchModal start"><i class="fa-solid fa-magnifying-glass-location"></i>  Find a Location</button>
                 <h4>OR</h4>
-                <button class="myLocation">My Location 📍</button>
+                <button class="myLocation start"><i class="fa-solid fa-location-dot"></i>  My Location</button>
             </div>
 
             <dialog class="resultsModal">                
-                <input type="search" id="location-search" name="location-search" />
+                <input type="search" id="location-search" name="location-search" placeholder="Search for a location" />
                 <i class="fa-solid fa-magnifying-glass searchLocation"></i>
                 <i class="fa-regular fa-circle-xmark"></i>
+                <i class="fa-solid fa-xmark"></i>
                 <!-- <button class="searchLocation">Search</button> -->
                 <ul class="searchResults">
 
@@ -34,7 +35,8 @@
                 <div class="imgContainer">
 
                 </div>
-                <h3 class="temp"></h3>
+                <h2 class="temp"></h2>
+                <h4 class="highlows"></h4>
                 <h3 class="time"></h3>
                 <ul class="forecast">
 
