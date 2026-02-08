@@ -5,6 +5,7 @@ const title = document.querySelector('.title')
 const searchResultsList = document.querySelector('.searchResults')
 const highslows = document.querySelector('.highlows')
 const hourly = document.querySelector('.hourly')
+const chart = document.querySelector('.chart');
 
 // let searchedName = searchInput.value;
 
@@ -60,7 +61,7 @@ const getLocation = async () => {
     } catch(e) {
     console.log(e)
 
-    alert('Location not found')
+    searchResultsList.textContent = 'No results found';
   }
 }
 
@@ -80,9 +81,6 @@ const getMyLocation = async () => {
 
 const getWeather = async () => {
 
-    const currentDateTime = new Date();
-    const currentTime = currentDateTime.toLocaleTimeString([], {hour12: false});
-
     const res2 = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min&hourly=temperature_2m&current=temperature_2m,is_day,weather_code&temperature_unit=fahrenheit`)
 
     const data2 = await res2.json();
@@ -90,6 +88,10 @@ const getWeather = async () => {
     const days = data2.daily.time;
 
     forecast.innerHTML = '';
+
+    const chartLabel = [];
+    const chartData1 = [];
+    const chartData2 = [];
         
     for (let i = 0; i < days.length; i++) {
         const day = document.createElement('li');
@@ -97,6 +99,11 @@ const getWeather = async () => {
         const weekday = date.toLocaleDateString('en', { weekday: 'short' });
         day.textContent = `${weekday} Low: ${data2.daily.temperature_2m_min[i]}°F - High ${data2.daily.temperature_2m_max[i]}°F`;
         forecast.appendChild(day);
+
+        chartLabel.push(weekday);
+
+        chartData1.push(data2.daily.temperature_2m_max[i]);
+        chartData2.push(data2.daily.temperature_2m_min[i]);
 
         if (i === 0) {
             highslows.textContent = `H:${data2.daily.temperature_2m_max[i]}°  L:${data2.daily.temperature_2m_min[i]}°`;
@@ -106,28 +113,39 @@ const getWeather = async () => {
         }
     }
 
-    const res3 = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min&hourly=temperature_2m&current=temperature_2m,is_day,weather_code&forecast_days=1&temperature_unit=fahrenheit`)
+    const res3 = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min&hourly=temperature_2m&current=temperature_2m,is_day,weather_code&timezone=auto&forecast_days=2&temperature_unit=fahrenheit`)
 
     const data3 = await res3.json();
     const hours = data3.hourly.time;
 
+    // const currentTime = data3.current.time.split('T')[1];
+    const currentTime = data3.current.time;
+
     // console.log(hours);
-    console.log(currentTime);
+    // console.log(currentTime);
+
+    let n = 0;
     
     for (let i = 0; i < hours.length; i++) {
-        const date = new Date(`${hours[i]}-05:00`);
-        const theHour = date.toLocaleTimeString('en', {hour12: false});
-        if (theHour < currentTime) {
+        // const date = new Date(`${date[i]}`);
+        // const theHour = date.toLocaleDateString([], {hour12: false});
+        // console.log(currentTime);
+        // console.log(date)
+        if (hours[i] < currentTime) {
             continue;
+        } else if (n === 24) {
+
+        break;
+
         } else {
         
+        n++;
+
         const hour = document.createElement('li');
         const date = new Date(`${hours[i]}`);
         const time = date.toLocaleTimeString('en', { hour: 'numeric', minute: 'numeric' });
         hour.textContent = `${time} ${data2.hourly.temperature_2m[i]}°F`;
-        if (i === 0) {
-            hour.style.borderLeft = 'none';
-        } else if (i === hours.length - 1) {
+        if (n === 24) {
             hour.style.borderRight = 'none';
         }
         hourly.appendChild(hour);
@@ -138,6 +156,8 @@ const getWeather = async () => {
     temp.style.marginBottom = '0';
 
     const weatherCode = data2.current.weather_code;
+
+    document.querySelector('.imgContainer').innerHTML = '';
 
     if (cloudy.includes(weatherCode)) {
         const icon = document.createElement('img');
@@ -165,7 +185,14 @@ const getWeather = async () => {
         icon.src = `./assets/thunderstorm.png`;
         document.querySelector('.imgContainer').appendChild(icon);
     }
+
+    const chartData = `https://quickchart.io/chart/render/zm-30a7d9b6-94f3-4d09-80ba-39f41a87eeeb?labels=${chartLabel}&data1=${chartData2}&data2=${chartData1}&width=500&height=500`;
+
+    chart.src = chartData;
+    chart.style.borderRadius = '10px';
+
 }
+        
 
 document.querySelector('.searchLocation').addEventListener('click', getLocation)
 
@@ -193,4 +220,9 @@ searchInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
         getLocation();
     }
+})
+
+document.querySelector('.back').addEventListener('click', () => {
+    document.querySelector('.weatherResults, .title').style.display = 'none';
+    setTimeout(() => {document.querySelector('.searchContainer').style.display = 'block';}, 500)
 })

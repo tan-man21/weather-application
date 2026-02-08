@@ -202,12 +202,29 @@ ul {
     position: relative;
     bottom: 10%;
     font-size: 4rem;
+    margin-bottom: none;
 }
 
 .hourly li {
-    border-left: 1px solid rgba(255, 255, 255, .1);
+    border-left: none;
     border-right: 1px solid rgba(255, 255, 255, .1);
     border-top: none;
     border-bottom: none;
     border-radius: 0;
+}
+
+.back {
+    position: relative;
+    right: 40%;
+    margin: 15px 15px;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+    border-bottom: 1px solid rgba(255, 255, 255, .1);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    width: 10%;
+    text-align: center;
+    background-color: rgba(240, 248, 255, 0);
 }
