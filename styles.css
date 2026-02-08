@@ -202,7 +202,7 @@ ul {
     position: relative;
     bottom: 10%;
     font-size: 4rem;
-    margin-bottom: none;
+    margin-bottom: 0;
 }
 
 .hourly li {

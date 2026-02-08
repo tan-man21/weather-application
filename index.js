@@ -88,6 +88,7 @@ const getWeather = async () => {
     const days = data2.daily.time;
 
     forecast.innerHTML = '';
+    hourly.innerHTML = '';
 
     const chartLabel = [];
     const chartData1 = [];
@@ -190,6 +191,9 @@ const getWeather = async () => {
 
     chart.src = chartData;
     chart.style.borderRadius = '10px';
+
+    const chartTitle = document.querySelector('.chartTitle');
+    chartTitle.textContent = '7 Day Forecast';
 
 }
         
