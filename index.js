@@ -6,6 +6,8 @@ const searchResultsList = document.querySelector('.searchResults')
 const highslows = document.querySelector('.highlows')
 const hourly = document.querySelector('.hourly')
 const chart = document.querySelector('.chart');
+const wind = document.querySelector('.wind');
+const humidity = document.querySelector('.humidity');
 
 // let searchedName = searchInput.value;
 
@@ -81,7 +83,7 @@ const getMyLocation = async () => {
 
 const getWeather = async () => {
 
-    const res2 = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min&hourly=temperature_2m&current=temperature_2m,is_day,weather_code&temperature_unit=fahrenheit`)
+    const res2 = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min&hourly=temperature_2m&current=temperature_2m,is_day,weather_code,wind_speed_10m,relative_humidity_2m&temperature_unit=fahrenheit`)
 
     const data2 = await res2.json();
 
@@ -186,6 +188,14 @@ const getWeather = async () => {
         icon.src = `./assets/thunderstorm.png`;
         document.querySelector('.imgContainer').appendChild(icon);
     }
+
+    const windText = document.createElement('p');
+    windText.textContent = `Wind: ${data2.current.wind_speed_10m} kmh`;
+    wind.appendChild(windText);
+
+    const humidityText = document.createElement('p');
+    humidityText.textContent = `Humidity: ${data2.current.relative_humidity_2m}%`;
+    humidity.appendChild(humidityText);
 
     const chartData = `https://quickchart.io/chart/render/zm-30a7d9b6-94f3-4d09-80ba-39f41a87eeeb?labels=${chartLabel}&data1=${chartData2}&data2=${chartData1}&width=500&height=500`;
 
