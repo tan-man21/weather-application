@@ -184,6 +184,8 @@ const getWeather = async () => {
         document.querySelector('.imgContainer').appendChild(icon);
     }
 
+    wind.innerHTML = '';
+    humidity.innerHTML = '';
     const windText = document.createElement('p');
     windText.textContent = `Wind: ${data2.current.wind_speed_10m} kmh`;
     wind.appendChild(windText);
