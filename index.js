@@ -54,6 +54,7 @@ const getLocation = async () => {
                 } else {
                     title.textContent = `${searchLocation} - ${admin1}`;
                 }
+                searchInput.value = '';
                 setTimeout(() => {document.querySelector('.weatherResults').style.display = 'flex';}, 500)
             })
         }
@@ -90,6 +91,8 @@ const getWeather = async () => {
 
     forecast.innerHTML = '';
     hourly.innerHTML = '';
+
+    document.querySelector('.imgContainer').innerHTML = '';
 
     const chartLabel = [];
     const chartData1 = [];
@@ -204,6 +207,7 @@ document.querySelector('.searchLocation').addEventListener('click', getLocation)
 
 document.querySelector('.searchModal').addEventListener('click', () => {
     document.querySelector('dialog').showModal();
+    searchResultsList.innerHTML = '';
 })
 
 document.querySelector('.fa-xmark').addEventListener('click', () => {
