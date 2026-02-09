@@ -184,15 +184,19 @@ const getWeather = async () => {
         document.querySelector('.imgContainer').appendChild(icon);
     }
 
+    
     wind.innerHTML = '';
-    humidity.innerHTML = '';
-    const windText = document.createElement('p');
-    windText.textContent = `Wind: ${data2.current.wind_speed_10m} kmh`;
-    wind.appendChild(windText);
+    wind.innerHTML = `
+    <i class="fa-solid fa-wind"></i>
+    <p class="windText">Wind: ${data2.current.wind_speed_10m} kmh</p>
+    `;
 
     const humidityText = document.createElement('p');
-    humidityText.textContent = `Humidity: ${data2.current.relative_humidity_2m}%`;
-    humidity.appendChild(humidityText);
+    humidity.innerHTML = '';
+    humidity.innerHTML = `
+    <i class="fa-solid fa-water"></i>
+    <p class="humidityText">Humidity: ${data2.current.relative_humidity_2m}%</p>
+    `;
 
     const chartData = `https://quickchart.io/chart/render/zm-30a7d9b6-94f3-4d09-80ba-39f41a87eeeb?labels=${chartLabel}&data1=${chartData2}&data2=${chartData1}&width=500&height=500`;
 
