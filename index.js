@@ -9,7 +9,6 @@ const chart = document.querySelector('.chart');
 const wind = document.querySelector('.wind');
 const humidity = document.querySelector('.humidity');
 
-// let searchedName = searchInput.value;
 
 let latitude = '';
 let longitude = '';
@@ -121,19 +120,12 @@ const getWeather = async () => {
     const data3 = await res3.json();
     const hours = data3.hourly.time;
 
-    // const currentTime = data3.current.time.split('T')[1];
     const currentTime = data3.current.time;
 
-    // console.log(hours);
-    // console.log(currentTime);
 
     let n = 0;
     
     for (let i = 0; i < hours.length; i++) {
-        // const date = new Date(`${date[i]}`);
-        // const theHour = date.toLocaleDateString([], {hour12: false});
-        // console.log(currentTime);
-        // console.log(date)
         if (hours[i] < currentTime) {
             continue;
         } else if (n === 24) {

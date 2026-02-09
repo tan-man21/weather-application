@@ -90,8 +90,6 @@ ul {
 }
 
 .searchContainer {
-    /* display: flex;
-    flex-direction: column; */
     margin: auto;
     padding: 10px;
     background-color: rgba(255, 255, 255, .1);
@@ -115,16 +113,9 @@ ul {
     border-radius: 10px;
     color: white;
     font-size: 16px;
-    /* font-weight: bold; */
     height: 90vh;
     overflow-y: scroll;
 }
-
-/* .weatherResults ul {
-    position: relative;
-    bottom: 10%;
-    font-size: 4rem;
-} */
 
 .weatherResults li {
     list-style: none;
@@ -133,11 +124,8 @@ ul {
     padding: 15px;
     border: 1px solid rgba(255, 255, 255, .1);
     border-radius: 10px;
-    /* background-color: rgba(255, 255, 255, .1); */
-    /* backdrop-filter: blur(.1px); */
     color: white;
     font-size: 16px;
-    /* font-weight: bold; */
     text-align: center;
 }
 
@@ -147,7 +135,6 @@ ul {
     border: 1px solid rgba(255, 255, 255, .1);
     border-radius: 50px;
     background-color: rgba(52, 52, 52, 0.1);
-    /* backdrop-filter: blur(8px); */
     color: white;
     font-size: 16px;
     font-weight: bold;
@@ -182,11 +169,8 @@ ul {
     padding: 5px 0px;
     border: 1px solid rgba(255, 255, 255, .1);
     border-radius: 10px;
-    /* background-color: rgba(255, 255, 255, .1); */
-    /* backdrop-filter: blur(.1px); */
     color: white;
     font-size: 16px;
-    /* font-weight: bold; */
     text-align: center;
     display: flex;
     flex-direction: row;
@@ -241,7 +225,6 @@ ul {
     display: flex;
     flex-direction: column;
     width: 48%;
-    /* position: relative; */
     justify-content: center;
 }
 
